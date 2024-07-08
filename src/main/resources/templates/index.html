@@ -1,0 +1,16 @@
+
+<!-- saved from url=(0079)https://kampus.umcs.pl/pluginfile.php/1135384/mod_resource/content/1/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>
+<form id="uploadForm" th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <label for="file">Wybierz obraz</label>
+    <div class="form-group">
+        <input type="file" id="file" name="file" accept="image/*" class="form-control-file">
+    </div>
+    <label for="factor">Jasność</label>
+    <input type="number" id="factor" name="factor" min="0" max="200" value="100">
+    <br><br>
+    <button type="submit" class="btn btn-primary">Upload</button>
+
+</form>
+
+</body></html>
