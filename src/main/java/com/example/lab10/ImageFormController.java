@@ -1,5 +1,6 @@
 package com.example.lab10;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,11 +36,14 @@ public class ImageFormController {
         }
         try {
             byte[] imageBytes1 = file.getBytes();
-            String encodedImage = Base64.getEncoder().encodeToString(imageBytes1);
-            byte[] imageBytes2 = Base64.getDecoder().decode(encodedImage);
-            BufferedImage bf = ImageIO.read(new ByteArrayInputStream(imageBytes2));
+            BufferedImage bf = ImageIO.read(new ByteArrayInputStream(imageBytes1));
             incBrightness(bf, factor);
-            base = Base64.getEncoder().encodeToString(imageBytes1);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bf, "png", baos);
+            byte[] imageBytes2 = baos.toByteArray();
+
+            base = Base64.getEncoder().encodeToString(imageBytes2);
             model.addAttribute("image", base);
             return "image";
         } catch (IOException e) {
